@@ -1,0 +1,120 @@
+\DeclareOptionBeamer{compress}{\beamer@compresstrue}
+\ProcessOptionsBeamer
+
+\newif\if@totalframes\@totalframesfalse
+\newif\if@hexcount\@hexcountfalse
+\newif\if@bincount\@bincountfalse
+\DeclareOption{hexcount}{\@hexcounttrue}
+\DeclareOption{bincount}{\@bincounttrue}
+\DeclareOption{totalframes}{\@totalframestrue}
+\ProcessOptions
+
+\mode<presentation>
+
+\usepackage{luacode}
+
+%%%- Lade das script (binary.lua) -%%%
+\directlua{binary = require('binary')}
+\newcommand*{\binaryPage}[1]{%
+  \directlua{binary.printBinary("\luaescapestring{#1}")}
+}%
+
+%%%- Lade das script (hexa.lua) -%%%
+\directlua{hexa = require('hexa')}
+\newcommand*{\hexaPage}[1]{%
+  \directlua{hexa.printHex("\luaescapestring{#1}")}
+}%
+
+
+%\usecolortheme{beaver}
+%\usecolortheme{seagull}
+\usecolortheme{dove}
+
+\useinnertheme{rounded}
+\useoutertheme[]{shadow}
+
+\setbeamertemplate{headline}[page number]
+\setbeamerfont{block title}{size={}}
+
+\definecolor{gold}{RGB}{254,232,0}
+\definecolor{chocolate}{RGB}{210, 105, 30}
+\definecolor{DarkTurquoise}{RGB}{72,209,204}
+\definecolor{Teal}{RGB}{0,128,128}
+\definecolor{DarkCyan}{RGB}{0,139,139}
+\definecolor{LightSeaGreen}{RGB}{32,178,170}
+\definecolor{SteelBlue}{RGB}{70,130,180}
+\definecolor{LightSteelBlue}{RGB}{176,196,222}
+\definecolor{LightSkyBlue}{RGB}{135,206,250}
+\definecolor{blockexample}{RGB}{0, 96, 206}
+\definecolor{blockexamplepale}{RGB}{92, 157, 230}
+
+\setbeamercolor{alerted text}{fg=DarkCyan}
+\setbeamercolor{example text}{fg=SteelBlue}
+
+\setbeamercolor*{palette secondary}{fg=white,bg=DarkCyan}   %subsection
+\setbeamercolor*{palette tertiary}{fg=white,bg=LightSteelBlue}   %section
+
+\setbeamercolor{title}{fg=black,bg=LightSteelBlue!60}   %Title of presentation
+\setbeamercolor{section title}{fg=white, bg=DarkCyan}
+\setbeamercolor{subsection title}{fg=white, bg=gray}
+\setbeamercolor{frametitle}{fg=white, bg=LightSeaGreen}
+
+\setbeamerfont{frametitle}{size=\small}
+%\setbeamerfont{frametitle}{serines=\bfseries}
+
+%--Footer for title and page--
+\setbeamertemplate{footline}{%
+  \colorbox{DarkCyan}{
+    \begin{minipage}{0.98\paperwidth}
+      \color{white}{\inserttitle}\hfill{\insertshortauthor}\hfill
+      \if@hexcount\strut\hexaPage{\insertframenumber} \if@totalframes/\hexaPage{\inserttotalframenumber}\fi
+      \else
+      \if@bincount\strut\binaryPage{\insertframenumber} \if@totalframes/\binaryPage{\inserttotalframenumber}\fi
+      \else
+      \strut\insertframenumber \if@totalframes/\inserttotalframenumber\fi
+      \fi
+      \fi
+    \end{minipage}
+    }
+}
+
+%-- test for logo in header--
+\setbeamertemplate{headline}
+{\begin{minipage}[c][0.9cm]{\paperwidth}
+    \begin{minipage}{0.17\paperwidth}
+		  \centering
+		  \includegraphics[width=0.14\paperwidth]{figures/FH-Dortmund-logo.pdf}
+		\end{minipage}
+		\begin{minipage}{0.8\paperwidth}
+		  % Fügt die Standard-Navi ein (miniframes)
+		  \insertnavigation{0.75\paperwidth}
+		  \vskip4pt
+		\end{minipage}
+  \end{minipage}
+  \color{DarkCyan}\rule{\paperwidth}{5pt} 
+}
+%%% Blocks settings %%%
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+%%% Default Blocks %%%
+\setbeamercolor{block title}{fg=white, bg=black!55}
+\setbeamercolor{block body}{bg=black!10!white,fg=black}
+
+%%% Alert Block %%%
+% title
+\setbeamercolor{block title alerted}{fg = white,bg=red!60}
+% body
+\setbeamercolor{block body alerted}{fg=black!90,bg=red!20}
+% parent of all alerts default is red
+\setbeamercolor{alerted text}{fg=green}
+
+%%% Example Block %%
+\setbeamercolor{block title example}{fg=white, bg=blockexample!60}
+\setbeamercolor{block body example}{fg=black, bg=blockexamplepale!20}
+
+\setbeamertemplate{items}[circle]
+\setbeamercolor{item}{fg=SteelBlue!90!white, bg=white}
+\setbeamercolor{frametitle}{bg=DarkCyan}
+\setbeamercovered{transparent}
+
+\mode<all>

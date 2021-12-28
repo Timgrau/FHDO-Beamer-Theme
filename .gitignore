@@ -1,0 +1,11 @@
+*~
+*.aux
+*.log
+*.nav
+*.toc
+*.vrb
+*.snm
+*.blg
+*.bbl
+*.out
+_minted-slides
