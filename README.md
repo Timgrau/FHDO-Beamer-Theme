@@ -13,13 +13,13 @@ Make sure TeX Live (LaTeX, lualatex) and make is installed on your system, if no
 
 |    package manager | installation |
 |--------------------|--------------|
-|rpm   |``sudo dnf install texlive-scheme-full make`` |
-|dpkg     |``sudo apt-get install texlive-scheme-full make``|
-|pacman  |``sudo pacman -S texlive-scheme-full make``|
+|rpm   |``sudo dnf install texlive make`` |
+|dpkg     |``sudo apt-get install texlive make``|
+|pacman  |``sudo pacman -S texlive make``|
 
 Clone the the repo:
 
-``git clone https://git.ikt.fh-dortmund.de:3000/tigra005/FHDO-Beamer-Theme.git``
+``git clone https://github.com/Timgrau/FHDO-Beamer-Theme.git ``
 
 navigate into the folder and hit ``make``, this will produce a directory ``/output`` where you will find the produced files 
  (``slides.pdf``. ``slides.aux``, etc.).
